@@ -97,7 +97,7 @@ if input_report == 'REPASSE LUPUS':
 
     st.write('')
     height_frame = 35 * (len(filtered_frame) + 1)
-    st.dataframe(filtered_frame[['DATA EMISSAO','NF VENDA','CLIENTE','LUPUS','REPASSE']], width=1200, height=height_frame)
+    st.dataframe(filtered_frame[['DATA EMISSAO','NF VENDA','CLIENTE','LUPUS','REPASSE']], width=1200, height=height_frame) # teste
 
 
 
