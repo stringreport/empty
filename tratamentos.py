@@ -52,6 +52,12 @@ pGestao_datasets = pGestao_datasets.drop(columns=list_drop_columns)
 # Criando arrays necessários - Datas
 pGestao_datasets['ANO MONTANTE'] = pGestao_datasets['DATA'].dt.year
 pGestao_datasets['MES MONTANTE'] = pGestao_datasets['DATA'].dt.month
+pGestao_datasets['ANO RECEBER'] = pGestao_datasets['DATA.2'].dt.year
+pGestao_datasets['MES RECEBER'] = pGestao_datasets['DATA.2'].dt.month
+pGestao_datasets['ANO PAGAR'] = pGestao_datasets['DATA.3'].dt.year
+pGestao_datasets['MES PAGAR'] = pGestao_datasets['DATA.3'].dt.month
+pGestao_datasets['ANO ESTOQUE'] = pGestao_datasets['DATA.1'].dt.year
+pGestao_datasets['MES ESTOQUE'] = pGestao_datasets['DATA.1'].dt.month
 
 # Historico do montante
 hist_montante = pGestao_datasets[['DATA','GIRO']]

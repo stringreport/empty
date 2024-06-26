@@ -22,15 +22,79 @@ st.title('Painel de Controle')
 
 st.markdown('<hr style="border-top: 1px solid #f0f0f0">', unsafe_allow_html=True)
 
-# DIV 1 - 2
 colHead1, colHead2 = st.columns(2)
 
 colHead1.markdown('Giro Disponivel')
 colHead2.markdown(f"<p style='text-align: left; margin-top: -30px; font-size: 70px'>R$ {giro_corrente}</p>", unsafe_allow_html=True)
 
-st.markdown(f"<h4 style='text-align: left;'>Recebimentos</h4>", unsafe_allow_html=True)
+
+# DIV 2:3 -RELAÇÃOD E PAINEIS
+
+pan1, pan2, pan3 = st.columns(3)
+
+list_year_brain = [2024,2025,2026,2027,2020,2029,2030]
+list_month_brain = [1,2,3,4,5,6,7,8,9,10]
+
+
+pan1.markdown(f"<h4 style='text-align: left;'>Brain</h4>", unsafe_allow_html=True)
+brain_year = pan3.selectbox('Ano',list_year_brain)
+brain_month = pan2.selectbox('Mês',list_month_brain)
+
+ppan1, ppan2, ppan3 = st.columns(3)
+
+# GRAFICO DO MONTANTE
+brain_frame_montante = pGestao_datasets[(pGestao_datasets['ANO MONTANTE'] == brain_year) & (pGestao_datasets['MES MONTANTE'] == brain_month) ]
+brain_frame_montante['DATA'] = brain_frame_montante['DATA'].astype(str)
+brain_graph_montante =px.area(brain_frame_montante,x='DATA',y='GIRO',title='Montante',color_discrete_sequence=['#836FFF'])
+brain_graph_montante.update_layout(xaxis_title=None, yaxis_title=None)
+ppan1.plotly_chart(brain_graph_montante)
+
+# GRAFICO A RECEBER PREVISTO
+brain_frame_mreceber_previsto = pGestao_datasets[(pGestao_datasets['ANO RECEBER'] == brain_year) & (pGestao_datasets['MES RECEBER'] == brain_month) ]
+brain_frame_mreceber_previsto['DATA.2'] = brain_frame_mreceber_previsto['DATA.2'].astype(str)
+brain_graph_receber_previsto =px.area(brain_frame_mreceber_previsto,x='DATA.2',y='PREVISTO',title='A receber - Previsto',color_discrete_sequence=['#00FF7F'])
+brain_graph_receber_previsto.update_layout(xaxis_title=None, yaxis_title=None)
+ppan2.plotly_chart(brain_graph_receber_previsto)
+
+# GRAFICO A RECEBER ATRASADO
+brain_frame_receber_atrasado = pGestao_datasets[(pGestao_datasets['ANO RECEBER'] == brain_year) & (pGestao_datasets['MES RECEBER'] == brain_month) ]
+brain_frame_receber_atrasado['DATA.2'] = brain_frame_receber_atrasado['DATA.2'].astype(str)
+brain_graph_receber_atrasado =px.area(brain_frame_receber_atrasado,x='DATA.2',y='ATRASADO',title='A receber - Atrasado',color_discrete_sequence=['#00FF7F'])
+brain_graph_receber_atrasado.update_layout(xaxis_title=None, yaxis_title=None)
+ppan3.plotly_chart(brain_graph_receber_atrasado)
+
+# GRAFICO A PAGAR - ATRASADO
+brain_frame_pagar_atrasado = pGestao_datasets[(pGestao_datasets['ANO PAGAR'] == brain_year) & (pGestao_datasets['MES PAGAR'] == brain_month) ]
+brain_frame_pagar_atrasado['DATA.3'] = brain_frame_pagar_atrasado['DATA.3'].astype(str)
+brain_graph_pagar_atrasado = px.area(brain_frame_pagar_atrasado,x='DATA.3',y='ATRASADO.1',title='A pagar - Atrasado',color_discrete_sequence=['#DC143C'])
+brain_graph_pagar_atrasado.update_layout(xaxis_title=None, yaxis_title=None)
+ppan1.plotly_chart(brain_graph_pagar_atrasado)
+
+# GRAFICO A PAGAR - PREVISTO
+brain_frame_pagar_previsto = pGestao_datasets[(pGestao_datasets['ANO PAGAR'] == brain_year) & (pGestao_datasets['MES PAGAR'] == brain_month) ]
+brain_frame_pagar_previsto['DATA.3'] = brain_frame_pagar_previsto['DATA.3'].astype(str)
+brain_graph_pagar_previsto = px.area(brain_frame_pagar_previsto,x='DATA.3',y='PREVISTO.1',title='A pagar - Previsto',color_discrete_sequence=['#DC143C'])
+brain_graph_pagar_previsto.update_layout(xaxis_title=None, yaxis_title=None)
+ppan2.plotly_chart(brain_graph_pagar_previsto)
+
+# GRAFICO AESTOQUE
+brain_frame_estoque = pGestao_datasets[(pGestao_datasets['ANO ESTOQUE'] == brain_year) & (pGestao_datasets['MES ESTOQUE'] == brain_month) ]
+brain_frame_estoque['DATA.1'] = brain_frame_estoque['DATA.1'].astype(str)
+brain_graph_estoque =px.area(brain_frame_estoque,x='DATA.1',y='VALOR',title='Estoque',color_discrete_sequence=['#00FF7F'])
+brain_graph_estoque.update_layout(xaxis_title=None, yaxis_title=None)
+ppan3.plotly_chart(brain_graph_estoque)
+
+
+
+
+
+st.markdown('<hr style="border-top: 1px solid #f0f0f0">', unsafe_allow_html=True)
+
+
+
 
 # DIV 2 - 3
+st.markdown(f"<h4 style='text-align: left;'>Recebimentos</h4>", unsafe_allow_html=True)
 colStatus1, colStatus2, colStatus3 = st.columns(3)
 
 # VALOR PAGO
