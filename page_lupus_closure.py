@@ -176,7 +176,7 @@ else:
 
 # Frame cabeçalho
 frame_summary_closure_add = pd.DataFrame({ 
-    'ITEM' : ['ACERTOS','FARELO DE TRIGO MG','FARELO DE TRIGO RJ','PAGAMENTOS XGO','REPASSE 5%'],
+    'ITEM' : ['ACERTOS','MATERIA PRIMA MG','MATERIA PRIMA RJ','PAGAMENTOS XGO','REPASSE 5%'],
     'VALOR' : [total_acerto,total_farelomg,total_farelorj,total_paglupus,total_repasse]
 })
 
