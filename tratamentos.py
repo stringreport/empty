@@ -1,7 +1,7 @@
 import pandas as pd 
 
 # TABELA DE DEXTRATO DE CREDITO PLANILHA DE GESTAO ----------------------------------------------------
-tabela_extratolupus = pd.read_csv('https://docs.google.com/spreadsheets/d/1jmJuCg80ccjQVnziWGK7V1r4Tyernxp7kXZkcBXz-qg/pub?gid=995652507&single=true&output=csv')
+tabela_extratolupus = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQmy0i9uFyvKpmskUqurckCzSO4_b_C-RUAowORN02_RXTt6x1L7oMnTkaKboHEaX_oBpahX1b-fg3F/pub?gid=932226378&single=true&output=csv')
 tabela_extratolupus = tabela_extratolupus.drop(columns=['Unnamed: 8',' VALOR TOTAL '])
 tabela_extratolupus = tabela_extratolupus.rename(columns={'Unnamed: 7' : 'VALOR'})
 tabela_extratolupus.columns = tabela_extratolupus.columns.str.strip()
